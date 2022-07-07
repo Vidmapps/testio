@@ -1,4 +1,4 @@
-import "./ServerList.scss";
+import "./ServerList.css";
 function Server(props) {
   return (
     <tr>

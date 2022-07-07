@@ -1,9 +1,9 @@
-import "./index.scss";
+import "./index.css";
 import React, { useState } from "react";
 import LoginPage from "./components/LoginPage/LoginPage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
-import getServers from "./utils/getServers";
+import { runAuth } from "./utils/getServers";
 
 function App() {
   const adminUser = {
@@ -13,12 +13,12 @@ function App() {
   const [user, setUser] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
 
-  const login = (details) => {
+  const login = async (details) => {
     if (
       details.username === adminUser.username &&
       details.password === adminUser.password
     ) {
-      getServers();
+      await runAuth();
       setUser({
         username: details.name,
         password: details.password,

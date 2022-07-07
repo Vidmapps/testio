@@ -1,4 +1,4 @@
-import "./LoginPage.scss"
+import "./LoginPage.css";
 import Logo from "../../assets/Logo.svg";
 import LoginForm from "../LoginForm/LoginForm";
 

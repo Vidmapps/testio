@@ -1,4 +1,4 @@
-import './Header.scss'
+import "./Header.css";
 import LogoSecondary from "../../assets/LogoSecondary.svg";
 import LogoutIcon from "../../assets/LogoutIcon.svg";
 

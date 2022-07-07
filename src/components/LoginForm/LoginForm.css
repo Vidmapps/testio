@@ -1,0 +1,46 @@
+.LoginForm {
+  width: 363px;
+  height: 210px;
+  padding-top: 69px;
+}
+.login-form-element {
+  width: -webkit-fill-available;
+  height: 58px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+.login-button {
+  background-color: #9fd53c;
+  border-color: #9fd53c;
+  color: #fff;
+}
+.login-button:active {
+  background-color: #9fd53c;
+  border-color: #9fd53c;
+  color: #fff;
+}
+.login-button:visited {
+  background-color: #9fd53c;
+  border-color: #9fd53c;
+  color: #fff;
+}
+.login-button:hover {
+  background-color: #86b300;
+  background-color: #9c3;
+}
+input:focus {
+  color: #999;
+}
+#username {
+  background-image: url(../../assets/UsernameIcon.svg);
+  background-position: 20px;
+  background-repeat: no-repeat;
+  text-indent: 50px;
+}
+#password {
+  background-image: url(../../assets/PasswordIcon.svg);
+  background-position: 20px;
+  background-repeat: no-repeat;
+  text-indent: 50px;
+}
