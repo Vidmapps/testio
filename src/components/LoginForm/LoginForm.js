@@ -1,13 +1,19 @@
-import "./LoginForm.css";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { logIn } from "../../store/login-actions";
 
-function LoginForm({ Login }) {
+import "./LoginForm.css";
+
+const LoginForm = () => {
+  const dispatch = useDispatch();
   let history = useHistory();
+
   const [details, setDetails] = useState({ username: "", password: "" });
+
   const submitHandler = (e) => {
     e.preventDefault();
-    Login(details);
+    dispatch(logIn(details));
     history.push("/home");
   };
   return (
@@ -15,7 +21,7 @@ function LoginForm({ Login }) {
       <form onSubmit={submitHandler}>
         <div className="">
           <input
-            type="username"
+            type="text"
             className="login-form-element"
             id="username"
             name="username"
@@ -45,6 +51,6 @@ function LoginForm({ Login }) {
       </form>
     </div>
   );
-}
+};
 
 export default LoginForm;

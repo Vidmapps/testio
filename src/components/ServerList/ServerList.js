@@ -1,13 +1,19 @@
-import Server from "./Server";
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { testioActions } from "../../store/testio-slice";
 
-function ServerList() {
-  const [serverList, setServerList] = useState([]);
+import Server from "./Server";
+
+const ServerList = () => {
+  console.log("hello");
+  const testio = useSelector((state) => state.testio);
+
+  const [serverList, setServerList] = useState(testio.serversList);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const checkIfStillLoading = () => {
-      localStorage.getItem("server") === "" 
+    /*  const checkIfStillLoading = () => {
+      localStorage.getItem("server") === ""
         ? alert("No servers are loaded, please contact support")
         : setIsLoading(false) && sortByDistance();
     };
@@ -19,7 +25,7 @@ function ServerList() {
     } else {
       setIsLoading(false);
       sortByDistance();
-    }
+    } */
   }, []);
 
   const sortByName = () => {
@@ -75,6 +81,6 @@ function ServerList() {
       )}
     </div>
   );
-}
+};
 
 export default ServerList;
