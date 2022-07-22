@@ -5,6 +5,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 .center-content {
   text-align: -webkit-center;
   padding-top: 229px;
@@ -12,4 +16,3 @@ body {
 .width-fill-available {
   width: -webkit-fill-available;
 }
-

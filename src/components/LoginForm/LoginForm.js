@@ -14,7 +14,7 @@ const LoginForm = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(logIn(details));
-    history.push("/home");
+    history.push("/home?sort=name");
   };
   return (
     <div className="LoginForm">

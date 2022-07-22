@@ -1,6 +1,6 @@
 import "./LoginPage.css";
 import Logo from "../../assets/Logo.svg";
-import LoginForm from "../LoginForm/LoginForm";
+import LoginForm from "../../components/LoginForm/LoginForm";
 
 const LoginPage = () => {
   return (

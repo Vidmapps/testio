@@ -1,61 +1,76 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { testioActions } from "../../store/testio-slice";
+import { useHistory, useLocation } from "react-router-dom";
+import { getServerList } from "../../store/serversList-actions";
 
 import Server from "./Server";
 
-const ServerList = () => {
-  console.log("hello");
-  const testio = useSelector((state) => state.testio);
+let initialLoad = true;
 
-  const [serverList, setServerList] = useState(testio.serversList);
+const ServerList = () => {
+  const history = useHistory();
+  const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+
+  const sortOption = queryParams.get("sort");
+
+  const dispatch = useDispatch();
+
+  const servers = useSelector((state) => state.testio.serversList);
+  const token = useSelector((state) => state.testio.token);
+
+  const [serversList, setServersList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const sortHandler = useCallback(
+    (option) => {
+      history.push(`/home?sort=${option}`);
+      const arrayForSort = [...servers];
+
+      if (option === "name") {
+        const sorted = arrayForSort.sort(function (a, b) {
+          if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+          if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+          return 0;
+        });
+
+        setServersList(sorted);
+      }
+
+      if (option === "distance") {
+        const sorted = arrayForSort.sort(function (a, b) {
+          if (a.distance < b.distance) return -1;
+          if (a.distance > b.distance) return 1;
+          return 0;
+        });
+
+        setServersList(sorted);
+      }
+    },
+    [history, servers]
+  );
+
+  const sortByDistanceHandler = useCallback(() => {
+    history.push("/home?sort=distance");
+
+    const arrayForSort = [...servers];
+  }, [history, servers]);
+
   useEffect(() => {
-    /*  const checkIfStillLoading = () => {
-      localStorage.getItem("server") === ""
-        ? alert("No servers are loaded, please contact support")
-        : setIsLoading(false) && sortByDistance();
-    };
-    if (localStorage.getItem("servers") === "") {
-      setIsLoading(true);
-      setTimeout(() => {
-        checkIfStillLoading();
-      }, 2000);
-    } else {
-      setIsLoading(false);
-      sortByDistance();
-    } */
-  }, []);
-
-  const sortByName = () => {
-    const sorted = JSON.parse(localStorage.getItem("servers")).sort(function (
-      a,
-      b
-    ) {
-      if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-      if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-      return 0;
-    });
-    setServerList(sorted);
-  };
-
-  const sortByDistance = () => {
-    const sorted = JSON.parse(localStorage.getItem("servers")).sort(function (
-      a,
-      b
-    ) {
-      if (a.distance < b.distance) return -1;
-      if (a.distance > b.distance) return 1;
-      return 0;
-    });
-    setServerList(sorted);
-  };
+    if (initialLoad) {
+      dispatch(getServerList(token));
+      initialLoad = false;
+    }
+    sortHandler(sortOption);
+  }, [dispatch, sortHandler, sortOption, token]);
 
   return (
     <div>
-      <button onClick={sortByName}>Show sorted by Name</button>
-      <button onClick={sortByDistance}>Show sorted by Distance</button>
+      <button onClick={() => sortHandler("name")}>Show sorted by Name</button>
+      <button onClick={() => sortHandler("distance")}>
+        Show sorted by Distance
+      </button>
       {isLoading ? (
         <div>Loading...</div>
       ) : (
@@ -67,7 +82,7 @@ const ServerList = () => {
             </tr>
           </thead>
           <tbody>
-            {serverList.map((server) => {
+            {serversList.map((server) => {
               return (
                 <Server
                   key={Math.random()}

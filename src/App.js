@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { testioActions } from "./store/testio-slice";
 
-import LoginPage from "./components/LoginPage/LoginPage";
-import HomePage from "./components/HomePage/HomePage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import HomePage from "./pages/HomePage/HomePage";
 import "./index.css";
 
 function App() {
@@ -16,14 +16,18 @@ function App() {
       dispatch(testioActions.confirmLogin(localStorage.getItem("token")));
   }, [dispatch]);
 
-  const homePage = <Route exact path="/home" component={() => <HomePage />} />;
-  const loginPage = <Route path="/" component={() => <LoginPage />} />;
-
-  return (
-    <Router>
-      <div>{testio.token ? homePage : loginPage}</div>
-    </Router>
+  const homePage = (
+    <Route exact path="/home">
+      <HomePage />
+    </Route>
   );
+  const loginPage = (
+    <Route exact path="/">
+      <LoginPage />
+    </Route>
+  );
+
+  return <div>{testio.token ? homePage : loginPage}</div>;
 }
 
 export default App;
