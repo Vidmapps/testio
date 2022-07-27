@@ -1,12 +1,13 @@
+import { Fragment } from "react";
 import Header from "../../components/Header/Header";
-import ServerList from "../../components/ServerList/ServerList";
+import ServersList from "../../components/ServersList/ServersList";
 
 const HomePage = () => {
   return (
-    <div>
+    <Fragment>
       <Header />
-      <ServerList />
-    </div>
+      <ServersList />
+    </Fragment>
   );
 };
 

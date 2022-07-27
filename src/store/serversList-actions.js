@@ -1,6 +1,6 @@
 import { testioActions } from "./testio-slice";
 
-export function getServerList(token) {
+export function getServersList(token) {
   if (localStorage.getItem("servers") === null) {
     return async (dispatch) => {
       const response = await fetch(
@@ -13,9 +13,15 @@ export function getServerList(token) {
           },
         }
       );
-      const data = await response.json();
-      localStorage.setItem("servers", JSON.stringify(data));
-      dispatch(testioActions.showServerList(data));
+      if (response.ok) {
+        const data = await response.json();
+
+        localStorage.setItem("servers", JSON.stringify(data));
+
+        dispatch(testioActions.showServerList(data));
+      } else {
+        alert("Server error: please contact support");
+      }
     };
   } else {
     return (dispatch) => {

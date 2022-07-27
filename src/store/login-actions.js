@@ -1,25 +1,13 @@
 import { testioActions } from "./testio-slice";
 
-const adminUser = {
-  username: "oxylabs",
-  password: "partyanimal",
-};
-
 export const logIn = (details) => {
-  if (
-    details.username === adminUser.username &&
-    details.password === adminUser.password
-  ) {
-    return async (dispatch) => {
-      const token = await getToken({
-        username: details.username,
-        password: details.password,
-      });
-      dispatch(testioActions.confirmLogin(token));
-    };
-  } else {
-    alert("User details do not match");
-  }
+  return async (dispatch) => {
+    const token = await getToken({
+      username: details.username,
+      password: details.password,
+    });
+    token && token !== undefined && dispatch(testioActions.confirmLogin(token));
+  };
 };
 
 async function getToken({ username, password }) {
@@ -31,8 +19,10 @@ async function getToken({ username, password }) {
       password,
     }),
   });
-
-  const data = await response.json();
-
-  return data.token;
+  if (response.ok) {
+    const data = await response.json();
+    return data.token;
+  } else {
+    alert("Authentication failed: please check login details");
+  }
 }

@@ -1,0 +1,20 @@
+.header {
+  height: 112px;
+}
+
+.headerStyle {
+  padding: 42px 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logoutIcon {
+  padding-right: 10px;
+}
+
+.logoutButton {
+  padding: 10px;
+  &:hover {
+    background-color: #9c3;
+  }
+}

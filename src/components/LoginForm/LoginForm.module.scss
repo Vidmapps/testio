@@ -1,0 +1,50 @@
+.loginForm {
+  width: 363px;
+  height: 210px;
+  padding-top: 69px;
+}
+
+.loginFormElement {
+  width: -webkit-fill-available;
+  height: 58px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.loginButton {
+  background-color: #9fd53c;
+  border-color: #9fd53c;
+  color: #fff;
+  &:hover {
+    background-color: #86b300;
+  }
+}
+
+input {
+  &:focus {
+    color: #999;
+  }
+}
+
+.loginFormInputIcon {
+  background-position: 20px;
+  background-repeat: no-repeat;
+  text-indent: 50px;
+}
+
+.username {
+  background-image: url(../../assets/UsernameIcon.svg);
+}
+
+.password {
+  background-image: url(../../assets/PasswordIcon.svg);
+}
+
+@media (max-width: 580px) {
+  .loginForm {
+    width: 90%;
+    height: 210px;
+    padding-top: 69px;
+  }
+}

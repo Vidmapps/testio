@@ -1,11 +1,11 @@
-import "./LoginPage.css";
+import styles from "./LoginPage.module.scss";
 import Logo from "../../assets/Logo.svg";
 import LoginForm from "../../components/LoginForm/LoginForm";
 
 const LoginPage = () => {
   return (
-    <div className="LoginPage">
-      <div className="center-content">
+    <div className={styles.loginPage}>
+      <div className="centerContent">
         <div>
           <img src={Logo} alt="Logo" />
         </div>

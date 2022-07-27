@@ -1,0 +1,22 @@
+th {
+  &:nth-child(1) {
+    text-align: start;
+  }
+  &:nth-child(2) {
+    text-align: end;
+  }
+}
+
+td {
+  &:nth-child(1) {
+    text-align: start;
+  }
+  &:nth-child(2) {
+    text-align: end;
+  }
+}
+
+.tableHeader {
+  background-color: #f5f5f5;
+  color: #999;
+}

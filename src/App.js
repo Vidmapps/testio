@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import { testioActions } from "./store/testio-slice";
 
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -9,25 +9,33 @@ import "./index.css";
 
 function App() {
   const dispatch = useDispatch();
-  const testio = useSelector((state) => state.testio);
+  const token = useSelector((state) => state.testio.token);
 
   useEffect(() => {
     localStorage.getItem("token") &&
       dispatch(testioActions.confirmLogin(localStorage.getItem("token")));
   }, [dispatch]);
 
-  const homePage = (
-    <Route exact path="/home">
-      <HomePage />
-    </Route>
-  );
-  const loginPage = (
-    <Route exact path="/">
-      <LoginPage />
-    </Route>
-  );
+  return (
+    <Switch>
+      {token && (
+        <Route exact path="/home">
+          <HomePage />
+        </Route>
+      )}
 
-  return <div>{testio.token ? homePage : loginPage}</div>;
+      {!token && (
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+      )}
+
+      <Route path="*">
+        {token && <Redirect to="/home" />}
+        {!token && <Redirect to="/login" />}
+      </Route>
+    </Switch>
+  );
 }
 
 export default App;

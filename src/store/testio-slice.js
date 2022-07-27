@@ -4,8 +4,7 @@ const testioSlice = createSlice({
   name: "testio",
   initialState: {
     serversList: [],
-    token: "",
-    serversListIsLoading: false,
+    token: null,
   },
   reducers: {
     confirmLogin(state, action) {
@@ -14,12 +13,14 @@ const testioSlice = createSlice({
       state.loggedIn = true;
       localStorage.setItem("token", state.token);
     },
+
     confirmLogout(state) {
       state.token = "";
       state.loggedIn = false;
       localStorage.removeItem("servers");
       localStorage.removeItem("token");
     },
+
     showServerList(state, action) {
       state.serversList = action.payload;
       state.serversListIsLoading = false;

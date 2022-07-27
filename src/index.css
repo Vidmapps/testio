@@ -9,10 +9,14 @@ a {
   text-decoration: none;
   color: inherit;
 }
-.center-content {
+.centerContent {
   text-align: -webkit-center;
   padding-top: 229px;
 }
-.width-fill-available {
+.widthFillAvailable {
   width: -webkit-fill-available;
+}
+
+.pointer {
+  cursor: pointer;
 }

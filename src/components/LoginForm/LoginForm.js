@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { logIn } from "../../store/login-actions";
 
-import "./LoginForm.css";
+import styles from "./LoginForm.module.scss";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -13,39 +13,39 @@ const LoginForm = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(logIn(details));
-    history.push("/home?sort=name");
+    !details.username && alert("Please add username");
+    !details.password && alert("Please add password");
+    if (details.username && details.password) {
+      dispatch(logIn(details));
+      history.push("/home?sort=name");
+    }
   };
+
   return (
-    <div className="LoginForm">
+    <div className={styles.loginForm}>
       <form onSubmit={submitHandler}>
-        <div className="">
-          <input
-            type="text"
-            className="login-form-element"
-            id="username"
-            name="username"
-            placeholder="Username"
-            onChange={(e) =>
-              setDetails({ ...details, username: e.target.value })
-            }
-            value={details.username}
-          />
-        </div>
-        <div className="">
-          <input
-            type="password"
-            className="login-form-element"
-            id="password"
-            name="password"
-            placeholder="Password"
-            onChange={(e) =>
-              setDetails({ ...details, password: e.target.value })
-            }
-            value={details.password}
-          />
-        </div>
-        <button type="submit" className="login-form-element login-button">
+        <input
+          type="text"
+          className={`${styles.loginFormElement} ${styles.username} ${styles.loginFormInputIcon}`}
+          id="username"
+          placeholder="Username"
+          minLength="4"
+          onChange={(e) => setDetails({ ...details, username: e.target.value })}
+          value={details.username}
+        />
+        <input
+          type="password"
+          className={`${styles.loginFormElement} ${styles.password} ${styles.loginFormInputIcon}`}
+          id="password"
+          placeholder="Password"
+          minLength="6"
+          onChange={(e) => setDetails({ ...details, password: e.target.value })}
+          value={details.password}
+        />
+        <button
+          type="submit"
+          className={`${styles.loginFormElement} ${styles.loginButton} pointer`}
+        >
           Log in
         </button>
       </form>
