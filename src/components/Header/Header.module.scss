@@ -1,5 +1,7 @@
+@import "../../variables";
+
 .header {
-  height: 112px;
+  height: $height * 2;
 }
 
 .headerStyle {

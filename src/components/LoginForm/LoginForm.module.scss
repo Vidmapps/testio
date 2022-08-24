@@ -1,12 +1,14 @@
+@import "../../variables";
+
 .loginForm {
   width: 363px;
-  height: 210px;
+  height: $height * 4;
   padding-top: 69px;
 }
 
 .loginFormElement {
   width: -webkit-fill-available;
-  height: 58px;
+  height: $height;
   margin-bottom: 18px;
   border-radius: 8px;
   font-size: 16px;
@@ -23,7 +25,7 @@
 
 input {
   &:focus {
-    color: #999;
+    color: $table-color;
   }
 }
 
@@ -44,7 +46,7 @@ input {
 @media (max-width: 580px) {
   .loginForm {
     width: 90%;
-    height: 210px;
+    height: $height * 4;
     padding-top: 69px;
   }
 }

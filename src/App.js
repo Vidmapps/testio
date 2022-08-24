@@ -5,9 +5,9 @@ import { testioActions } from "./store/testio-slice";
 
 import LoginPage from "./pages/LoginPage/LoginPage";
 import HomePage from "./pages/HomePage/HomePage";
-import "./index.css";
+import "./index.scss";
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.testio.token);
 
@@ -36,6 +36,6 @@ function App() {
       </Route>
     </Switch>
   );
-}
+};
 
 export default App;
